@@ -38,7 +38,19 @@
   var sets = {};
   try { sets = JSON.parse(setsEl.textContent || '{}'); } catch (e) { return; }
 
-  var currentSet = [];
+  // Flatten all project sets into one continuous list, ordered by the tiles
+  // in the DOM. Record each project's starting index so a tap opens at the
+  // right photo and swipe carries on through the rest of the gallery.
+  var flat = [];
+  var startIndex = {};
+  document.querySelectorAll('.tile[data-project]').forEach(function (tile) {
+    var key = tile.getAttribute('data-project');
+    if (key in startIndex) return;
+    startIndex[key] = flat.length;
+    flat = flat.concat(sets[key] || []);
+  });
+
+  var currentSet = flat;
   var currentIdx = 0;
   var triggerEl = null;
 
@@ -70,11 +82,11 @@
   }
 
   function openLightbox(setKey, trigger) {
-    var s = sets[setKey];
-    if (!s || !s.length) return;
-    currentSet = s;
+    if (!flat.length) return;
+    var startAt = startIndex.hasOwnProperty(setKey) ? startIndex[setKey] : 0;
+    currentSet = flat;
     triggerEl = trigger || null;
-    showAt(0);
+    showAt(startAt);
     lb.hidden = false;
     document.body.setAttribute('data-lightbox-open', '');
     lbClose.focus();
