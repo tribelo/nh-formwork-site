@@ -381,7 +381,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
   object-fit: contain; border: 2px solid var(--ink);
   box-shadow: 0 30px 80px -20px rgba(0,0,0,.8);
 }
-.lightbox-figure { position: relative; z-index: 1; }
+.lightbox-figure { position: relative; z-index: 1; touch-action: pan-y pinch-zoom; user-select: none; -webkit-user-select: none; }
 .lightbox-close, .lightbox-prev, .lightbox-next {
   position: fixed; z-index: 2;
   background: rgba(15,23,42,.7); color: var(--ink); border: 1px solid var(--line);

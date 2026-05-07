@@ -114,6 +114,28 @@
     if (e.target === lb) closeLightbox();
   });
 
+  // Swipe / drag navigation (touch, mouse, stylus)
+  var swipe = null;
+  function swipeIgnore(target) {
+    return !!(target && target.closest && target.closest('.lightbox-close, .lightbox-prev, .lightbox-next, .lightbox-counter'));
+  }
+  lb.addEventListener('pointerdown', function (e) {
+    if (lb.hidden || swipeIgnore(e.target) || e.pointerType === 'mouse' && e.button !== 0) return;
+    swipe = { x: e.clientX, y: e.clientY, t: Date.now() };
+  });
+  lb.addEventListener('pointerup', function (e) {
+    if (!swipe) return;
+    var dx = e.clientX - swipe.x;
+    var dy = e.clientY - swipe.y;
+    var dt = Date.now() - swipe.t;
+    swipe = null;
+    var abs = Math.abs(dx);
+    if (abs > 50 && abs > Math.abs(dy) * 1.5 && dt < 600 && currentSet.length > 1) {
+      showAt(currentIdx + (dx < 0 ? 1 : -1));
+    }
+  });
+  lb.addEventListener('pointercancel', function () { swipe = null; });
+
   document.addEventListener('keydown', function (e) {
     if (lb.hidden) {
       if (e.key === 'Escape' && header && header.hasAttribute('data-nav-open')) {
