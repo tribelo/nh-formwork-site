@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://tribelo.github.io/nh-formwork-site/</loc>
+    <loc>https://www.nhformwork.co.uk/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://tribelo.github.io/nh-formwork-site/assets/img/hero/abbey.jpg</image:loc>
+      <image:loc>https://www.nhformwork.co.uk/assets/img/hero/abbey.jpg</image:loc>
       <image:caption>NH Formwork sign on scaffold at Bath Abbey</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://tribelo.github.io/nh-formwork-site/assets/img/logo.jpg</image:loc>
+      <image:loc>https://www.nhformwork.co.uk/assets/img/logo.jpg</image:loc>
       <image:caption>NH Formwork Limited logo</image:caption>
     </image:image>
   </url>
