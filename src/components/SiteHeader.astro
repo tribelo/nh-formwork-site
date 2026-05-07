@@ -1,0 +1,49 @@
+---
+// Pure-CSS mobile nav: a hidden checkbox toggles the menu via :checked.
+// No client-side JavaScript ships.
+---
+
+<header class="site-header" role="banner">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="NH Formwork Limited — home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="28" height="28" focusable="false">
+          <rect width="32" height="32" rx="5" fill="currentColor" opacity=".12" />
+          <path d="M7 24V8h3l8 11V8h3v16h-3L10 13v11z" fill="currentColor" />
+        </svg>
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">NH Formwork</span>
+        <span class="brand-sub">Limited</span>
+      </span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      <input
+        class="nav-toggle-checkbox visually-hidden"
+        type="checkbox"
+        id="nav-toggle"
+        aria-label="Toggle navigation menu"
+      />
+      <label class="nav-toggle" for="nav-toggle" aria-hidden="true">
+        <span class="nav-toggle-bars" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+        <span class="visually-hidden">Menu</span>
+      </label>
+      <ul id="nav-menu" class="nav-menu">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li class="nav-cta-item">
+          <a
+            class="btn btn-primary nav-cta"
+            href="tel:+447966190511"
+            aria-label="Call NH Formwork on 07966 190511"
+          >Call us</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

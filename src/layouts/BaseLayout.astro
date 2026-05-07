@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'NH Formwork Limited | Concrete Formwork & Stairs, Bath UK',
+  description = 'NH Formwork Limited builds precision concrete formwork in Bath and across South West England — concrete stairs, walls, slabs, columns and reinforced structures.',
+} = Astro.props;
+
+// NOTE: Update this canonical / OG URL placeholder when a real domain is wired up.
+// The Astro config drives `Astro.site` (currently the GitHub Pages URL) and `base`.
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImage = new URL(`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`, Astro.site).toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'GeneralContractor',
+  name: 'NH Formwork Limited',
+  description:
+    'Concrete formwork specialists — concrete stairs, walls, slabs, columns and reinforced concrete structures.',
+  url: canonical,
+  telephone: '+44 7966 190511',
+  email: 'nhformwork@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Bath',
+    addressRegion: 'Somerset',
+    addressCountry: 'GB',
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Bath' },
+    { '@type': 'AdministrativeArea', name: 'South West England' },
+  ],
+  sameAs: ['https://www.facebook.com/nhformwork/photos'],
+  knowsAbout: [
+    'Concrete formwork',
+    'Concrete stairs',
+    'Reinforced concrete structures',
+    'System formwork',
+    'Traditional formwork',
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#3a3a3a" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NH Formwork Limited" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:image" content={ogImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} />
+
+    <link rel="sitemap" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/sitemap-index.xml`} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <SiteHeader />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <SiteFooter />
+  </body>
+</html>

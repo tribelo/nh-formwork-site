@@ -1,51 +1,78 @@
 # NH Formwork Limited — Website
 
-Single-page static brochure site for NH Formwork Limited, a Bath-based concrete formwork specialist.
+Single-page static brochure site for NH Formwork Limited, a Bath-based concrete formwork specialist. Built with [Astro](https://astro.build/) — static-first, ships zero client-side JavaScript, system fonts only, no third-party scripts.
 
-## What's here
+## Prerequisites
 
-- `index.html` — the entire page
-- `styles.css` — single stylesheet, system fonts, light + dark mode
-- `script.js` — small progressive-enhancement script for the mobile nav toggle (site is fully usable without it)
-- `robots.txt`, `sitemap.xml` — basic SEO
-- `LICENSE` — MIT
-- `.gitignore` — standard
+- **Node.js 20+** (Node 24 also works fine).
+- npm (bundled with Node).
 
-No build step, no dependencies, no tracking, no third-party scripts.
-
-## Preview locally
+## Install
 
 ```bash
-python3 -m http.server 8080
+npm install
 ```
 
-Then open <http://localhost:8080/>.
+## Develop
+
+```bash
+npm run dev
+```
+
+Then open <http://localhost:4321/nh-formwork-site/> (the `base` path is configured in `astro.config.mjs`).
+
+## Build
+
+```bash
+npm run build
+```
+
+Output is written to `dist/`. To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## Deploy
+
+Pushes to `main` are deployed automatically to GitHub Pages via the workflow at `.github/workflows/deploy.yml` (uses the official `withastro/action@v3` and `actions/deploy-pages@v4`). The workflow can also be triggered manually from the Actions tab (`workflow_dispatch`).
+
+## Site / base URL
+
+The `astro.config.mjs` is currently set up for GitHub Pages:
+
+- `site: 'https://pittdog.github.io'`
+- `base: '/nh-formwork-site'`
+
+When a real domain (e.g. `https://nhformwork.co.uk`) is wired up, drop the `base` and update `site` to the real origin. There's a `// TODO` comment in `astro.config.mjs` as a reminder. The canonical URL, OG URL, and JSON-LD `url` are all derived from these settings, so updating the config updates the whole site.
 
 ## Where contact details live
 
-The phone number, email, Facebook link and service area are hard-coded in `index.html`. Search for `+447966190511`, `nhformwork@gmail.com`, or `facebook.com/nhformwork` to find every reference. Don't forget to update the JSON-LD `LocalBusiness` block at the top of the file as well if anything changes.
+The phone number, email, Facebook link and service area are hard-coded in the components. Search for `+447966190511`, `nhformwork@gmail.com`, or `facebook.com/nhformwork` to find every reference. The JSON-LD `GeneralContractor` block lives in `src/layouts/BaseLayout.astro`.
 
-## Deployment
+## Project structure
 
-This is a fully static site — drop the files onto any static host. Suggested options:
-
-- **GitHub Pages**: push to a repo and enable Pages on the `main` branch (root). No CNAME file is included; add one if you want a custom domain.
-- **Netlify / Cloudflare Pages**: connect the repo, no build command, publish directory is the repo root.
-- **Plain web host**: copy all files via SFTP.
-
-### After deploying
-
-Update the canonical URL and `og:url` in `index.html` (and the URLs in `sitemap.xml` / `robots.txt`) if the live URL is anything other than `https://nhformwork.co.uk/`. There's a `<!-- NOTE: ... -->` comment in `index.html` next to the canonical link as a reminder.
+```
+public/                 # static assets copied verbatim (favicon, robots.txt)
+src/
+  pages/index.astro     # the only page
+  layouts/BaseLayout.astro   # head, meta, OG, JSON-LD, skip-link, footer
+  components/           # SiteHeader, Hero, Services, WhyUs, Gallery, About, Contact, SiteFooter
+  styles/global.css     # all styles, system fonts, light + dark mode
+astro.config.mjs        # site, base, sitemap integration
+```
 
 ## Accessibility & performance notes
 
-- Semantic HTML5 landmarks, skip-link, visible focus rings, `prefers-reduced-motion` respected, dark-mode aware.
+- Semantic HTML5 landmarks, skip-link, visible focus rings, `prefers-reduced-motion` respected, `lang="en-GB"`, dark-mode aware.
 - System font stack — no Google Fonts or external CSS.
-- Inline SVG icons and an inline SVG favicon (data URI), no extra HTTP requests for graphics.
-- Total HTML + CSS is comfortably under 50 KB uncompressed.
+- Inline SVG icons; favicon is a real `.svg` file, no extra HTTP request beyond the icon itself.
+- **Zero client-side JavaScript shipped.** The mobile nav is a pure-CSS hidden checkbox toggle.
+- Sitemap is generated at build time by `@astrojs/sitemap`.
+- Total HTML + CSS comfortably under 50 KB uncompressed.
 
 ## Things the owner should review
 
-- The canonical URL placeholder (`https://nhformwork.co.uk/`) — set this to the real production URL.
-- The Open Graph image URL (`/og-image.jpg`) — currently a placeholder; add a real 1200x630 image and upload it to the site root, or remove the `og:image` meta if not using one.
+- The site/base URL placeholder in `astro.config.mjs` — set to the real production origin once a custom domain is wired up.
+- The Open Graph image — currently falls back to the SVG favicon. Add a real 1200x630 image in `public/` and update the `ogImage` in `BaseLayout.astro` if desired.
 - The "Recent work" gallery uses CSS-only placeholders. Replace with real project photos when available.

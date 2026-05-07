@@ -203,6 +203,8 @@ ul[role="list"] { list-style: none; margin: 0; padding: 0; }
 .nav-menu .nav-cta { color: var(--c-on-accent); padding: .55rem 1rem; }
 .nav-menu .nav-cta:hover { background: #a85222; }
 
+/* Mobile nav: pure-CSS, hidden checkbox toggle. No JS shipped. */
+.nav-toggle-checkbox { position: absolute; opacity: 0; pointer-events: none; }
 .nav-toggle {
   display: none;
   background: transparent;
@@ -213,6 +215,7 @@ ul[role="list"] { list-style: none; margin: 0; padding: 0; }
   justify-content: center;
   cursor: pointer;
   color: var(--c-ink);
+  user-select: none;
 }
 .nav-toggle-bars {
   width: 18px; height: 12px;
@@ -240,7 +243,11 @@ ul[role="list"] { list-style: none; margin: 0; padding: 0; }
     padding: .5rem var(--gutter) 1rem;
     display: none;
   }
-  .nav-menu.is-open { display: flex; }
+  .nav-toggle-checkbox:checked ~ .nav-menu { display: flex; }
+  .nav-toggle-checkbox:focus-visible ~ .nav-toggle {
+    outline: 3px solid var(--c-focus);
+    outline-offset: 2px;
+  }
   .nav-menu a {
     padding: .85rem .5rem;
     border-bottom: 1px solid var(--c-line);
