@@ -277,11 +277,11 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .contact-list a { color: var(--ink); }
 .contact-list a:hover, .contact-list a:focus-visible { color: var(--accent); }
 
-#phone-box .btn { padding: .55rem 1rem; font-size: .76rem; }
-#phone-box a {
+.phone-link {
   font-style: italic; font-weight: 900; font-size: 1.15rem;
   color: var(--accent); letter-spacing: .02em; text-decoration: none;
 }
+.phone-link:hover, .phone-link:focus-visible { color: var(--accent-2); }
 
 .contact-form {
   background: var(--bg-3); border: 1px solid var(--line);

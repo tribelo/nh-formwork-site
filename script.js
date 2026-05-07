@@ -23,21 +23,6 @@
     });
   }
 
-  // ----- Phone reveal -----
-  var phoneBox = document.getElementById('phone-box');
-  var phoneBtn = document.getElementById('phone-reveal');
-  if (phoneBtn && phoneBox) {
-    phoneBtn.addEventListener('click', function () {
-      var p1 = '07966', p2 = '190511';
-      var link = document.createElement('a');
-      link.href = 'tel:+44' + p1.slice(1) + p2;
-      link.textContent = p1 + ' ' + p2;
-      link.setAttribute('aria-label', 'Call NH Formwork on 0' + p1.slice(1) + ' ' + p2);
-      phoneBox.replaceChildren(link);
-      link.focus();
-    });
-  }
-
   // ----- Lightbox gallery -----
   var lb = document.getElementById('lightbox');
   var lbImg = document.getElementById('lightbox-img');
