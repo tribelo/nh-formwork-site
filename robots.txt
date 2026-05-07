@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pittdog.github.io/nh-formwork-site/sitemap.xml
+Sitemap: https://tribelo.github.io/nh-formwork-site/sitemap.xml
