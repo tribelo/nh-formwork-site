@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nhformwork.co.uk/sitemap.xml
+Sitemap: https://pittdog.github.io/nh-formwork-site/sitemap.xml
