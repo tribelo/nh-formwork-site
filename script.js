@@ -91,6 +91,19 @@
     if (triggerEl && typeof triggerEl.focus === 'function') triggerEl.focus();
   }
 
+  function focusableInLightbox() {
+    return [lbClose, lbPrev, lbNext].filter(function (el) { return el && !el.hidden; });
+  }
+
+  lb.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab') return;
+    var f = focusableInLightbox();
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+    else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+  });
+
   document.querySelectorAll('.tile[data-project]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       openLightbox(btn.getAttribute('data-project'), btn);
