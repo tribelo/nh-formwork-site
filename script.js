@@ -42,12 +42,17 @@
   var currentIdx = 0;
   var triggerEl = null;
 
+  function preload(src) { var i = new Image(); i.src = src; }
+
   function showAt(idx) {
     if (!currentSet.length) return;
     if (idx < 0) idx = currentSet.length - 1;
     if (idx >= currentSet.length) idx = 0;
     currentIdx = idx;
     var item = currentSet[idx];
+    lb.classList.add('is-loading');
+    lbImg.onload = function () { lb.classList.remove('is-loading'); };
+    lbImg.onerror = function () { lb.classList.remove('is-loading'); };
     lbImg.src = item.src;
     lbImg.alt = item.alt || '';
     lbCap.textContent = item.alt || '';
@@ -56,6 +61,12 @@
     lbPrev.hidden = !multi;
     lbNext.hidden = !multi;
     if (lbCount) lbCount.hidden = !multi;
+    if (multi) {
+      var nextIdx = (idx + 1) % currentSet.length;
+      var prevIdx = (idx - 1 + currentSet.length) % currentSet.length;
+      preload(currentSet[nextIdx].src);
+      preload(currentSet[prevIdx].src);
+    }
   }
 
   function openLightbox(setKey, trigger) {
