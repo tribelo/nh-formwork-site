@@ -338,6 +338,14 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .footer-col-info p { margin: 0; font-size: .85rem; line-height: 1.55; }
 .footer-meta, .footer-built { margin: 0; font-size: .82rem; }
 .footer-built { font-style: italic; opacity: .7; }
+.footer-built a {
+  color: var(--ink-2); text-decoration: none;
+  border-bottom: 1px solid var(--ink-3);
+  transition: color .2s var(--easing), border-color .2s var(--easing);
+}
+.footer-built a:hover, .footer-built a:focus-visible {
+  color: var(--accent); border-bottom-color: var(--accent);
+}
 
 .social-list {
   list-style: none; padding: 0; margin: 0;
